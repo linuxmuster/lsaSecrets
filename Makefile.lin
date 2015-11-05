@@ -1,0 +1,20 @@
+CC=g++
+CCFLAGS=-Wall
+LDFLAGS=-lpthread -ldl
+
+SRC_DIR=src
+BIN_DIR=bin
+INC_DIR=inc
+SQLITE_DIR=3rd_party/sqlite
+all:chromePass
+
+chromePass:$(SRC_DIR)/chromePass.cpp
+	@echo --- Build chrome password extractor
+	$(CC) $(CCFLAGS) $(LDFLAGS) $(SRC_DIR)/chromePass.cpp \
+	-o $(BIN_DIR)/chromePass -I$(INC_DIR) $(SQLITE_DIR)/sqlite3.o
+	
+clean:
+	rm *.o
+	 
+cleanall:
+	rm bin/chromePass *.o

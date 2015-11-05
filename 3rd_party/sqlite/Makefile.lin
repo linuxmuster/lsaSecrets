@@ -1,0 +1,20 @@
+CC=gcc
+CCFLAGS=-Wall
+LDFLAGS=-lpthread -ldl
+
+
+all:sqlite3 shell
+
+sqlite3:sqlite3.c
+	@echo --- Build sqlite3 object
+	$(CC) $(CCFLAGS) -c $(LDFLAGS) sqlite3.c
+
+shell:sqlite3 shell.c
+	@echo --- Build sqlite3 shell
+	$(CC) $(CCFLAGS) $(LDFLAGS) shell.c sqlite3.o -o shell
+	
+clean:
+	rm *.o
+	 
+cleanall:
+	rm shell *.o
